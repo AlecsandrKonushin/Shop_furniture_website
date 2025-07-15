@@ -10,6 +10,9 @@ Route::prefix('/products')->name('product.')->group(function () {
     Route::get('/', \App\Http\Controllers\Product\IndexController::class)->name('index');
     Route::get('/create', \App\Http\Controllers\Product\CreateController::class)->name('create');
     Route::post('/', \App\Http\Controllers\Product\StoreController::class)->name('store');
+    Route::get('/{product}', \App\Http\Controllers\Product\ShowController::class)->name('show');
+    Route::get('/{product}/edit', \App\Http\Controllers\Product\EditController::class)->name('edit');
+    Route::patch('/{product}', \App\Http\Controllers\Product\UpdateController::class)->name('update');
 });
 
 Route::prefix('/categories')->name('category.')->group(function () {

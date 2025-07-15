@@ -203,7 +203,7 @@
                     </x-nav-link>
                     <x-nav-link href="{{ route('product.index') }}" route="product.index">
                         <span class="nav-icon"><i class="fa-solid fa-list fa-lg"></i></span>
-                        <span class="nav-link-text">Продукты</span>
+                        <span class="nav-link-text">Товары</span>
                     </x-nav-link>
                     <x-nav-link href="{{ route('category.index') }}" route="category.index">
                         <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
