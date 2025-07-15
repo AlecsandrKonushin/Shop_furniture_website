@@ -1,0 +1,42 @@
+@extends('layouts.main')
+
+@section('content')
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            <h1 class="app-page-title">Категории</h1>
+            <div class="app-card-footer p-4 mt-auto">
+                <a class="btn app-btn-secondary" href="{{ route('category.create') }}">Добавить категорию</a>
+            </div>
+            <div class="table-responsive col-6">
+                <table class="table app-table-hover mb-0 text-left">
+                    <thead>
+                    <tr>
+                        <th class="cell">ID</th>
+                        <th class="cell">Название</th>
+                        <th class="cell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($categories as $category)
+                        <tr>
+                            <td class="cell">{{ $category->id }}</td>
+                            <td class="cell">{{ $category->title }}</td>
+                            <td class="cell">
+                                <a href="{{ route('category.show', $category->id) }}"><i class="fa-solid fa-eye me-2"></i></a>
+                                <a href="{{ route('category.edit', $category->id) }}"><i class="fa-solid fa-pen text-warning me-2"></i></a>
+                                <form action="{{ route('category.delete', $category->id) }}" method="POST" id="delete-form-{{ $category->id }}" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $category->id }}').submit();">
+                                        <i class="fa-solid fa-trash text-danger"></i>
+                                    </a>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
