@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('main.index');
-})->name('main.index');
+Route::get('/', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
 Route::prefix('/products')->name('product.')->group(function () {
     Route::get('/', \App\Http\Controllers\Product\IndexController::class)->name('index');
