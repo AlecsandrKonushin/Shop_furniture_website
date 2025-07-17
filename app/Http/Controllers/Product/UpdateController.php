@@ -55,6 +55,6 @@ class UpdateController extends Controller
         }
 
         $product->update($data);
-        return redirect()->route('product.show', $product);
+        return redirect()->route('admin.product.show', $product);
     }
 }

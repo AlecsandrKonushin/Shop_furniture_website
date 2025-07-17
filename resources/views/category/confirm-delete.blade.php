@@ -39,7 +39,7 @@
                 </div>
                 <div class="app-card-body px-4 w-100">
                     <div class="item py-3">
-                        <form action="{{ route('category.delete', $category->id) }}" method="POST"
+                        <form action="{{ route('admin.category.delete', $category->id) }}" method="POST"
                               id="delete-form-{{ $category->id }}" style="display: inline;">
                             @csrf
                             @method('DELETE')

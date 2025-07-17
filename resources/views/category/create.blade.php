@@ -5,7 +5,7 @@
         <div class="container-xl">
             <h1 class="app-page-title">Добавление категории</h1>
             <div class="app-card-body col-6">
-                <form class="settings-form" action="{{ route('category.store') }}" method="POST">
+                <form class="settings-form" action="{{ route('admin.category.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Название категории</label>

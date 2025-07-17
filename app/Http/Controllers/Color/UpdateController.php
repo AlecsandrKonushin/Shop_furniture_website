@@ -11,6 +11,6 @@ class UpdateController extends Controller
     {
         $data = $request->validated();
         $color->update($data);
-        return redirect()->route('color.index');
+        return redirect()->route('admin.color.index');
     }
 }

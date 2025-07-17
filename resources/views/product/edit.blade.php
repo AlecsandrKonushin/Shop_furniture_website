@@ -5,7 +5,7 @@
         <div class="container-xl">
             <h1 class="app-page-title">Редактирование продукта</h1>
             <div class="app-card-body col-6">
-                <form class="settings-form" action="{{ route('product.update', $product) }}" method="POST"
+                <form class="settings-form" action="{{ route('admin.product.update', $product) }}" method="POST"
                       enctype="multipart/form-data" id="productForm">
                     @csrf
                     @method('PATCH')

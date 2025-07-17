@@ -191,7 +191,7 @@
         <div class="sidepanel-inner d-flex flex-column">
             <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
             <div class="app-branding">
-                <a class="app-logo" href="{{ route('main.index') }}"><img class="logo-icon me-2"
+                <a class="app-logo" href="{{ route('admin.main.index') }}"><img class="logo-icon me-2"
                                                                           src="{{ asset('assets/images/app-logo.svg') }}"
                                                                           alt="logo"><span
                         class="logo-text">Админка</span></a>
@@ -200,23 +200,23 @@
 
             <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
                 <ul class="app-menu list-unstyled accordion" id="menu-accordion">
-                    <x-nav-link href="{{ route('main.index') }}" route="main.index">
+                    <x-nav-link href="{{ route('admin.main.index') }}" route="main.index">
                         <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
                         <span class="nav-link-text">Главная</span>
                     </x-nav-link>
-                    <x-nav-link href="{{ route('product.index') }}" route="product.index">
+                    <x-nav-link href="{{ route('admin.product.index') }}" route="product.index">
                         <span class="nav-icon"><i class="fa-solid fa-list fa-lg"></i></span>
                         <span class="nav-link-text">Товары</span>
                     </x-nav-link>
-                    <x-nav-link href="{{ route('category.index') }}" route="category.index">
+                    <x-nav-link href="{{ route('admin.category.index') }}" route="category.index">
                         <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
                         <span class="nav-link-text">Категории</span>
                     </x-nav-link>
-                    <x-nav-link href="{{ route('color.index') }}" route="color.index">
+                    <x-nav-link href="{{ route('admin.color.index') }}" route="color.index">
                         <span class="nav-icon"><i class="fa-solid fa-palette fa-lg"></i></span>
                         <span class="nav-link-text">Цвета</span>
                     </x-nav-link>
-                    <x-nav-link href="{{ route('website.index') }}" route="website.index">
+                    <x-nav-link href="{{ route('admin.website.index') }}" route="website.index">
                         <span class="nav-icon"><i class="fa-solid fa-window-maximize fa-lg"></i></span>
                         <span class="nav-link-text">Сайт</span>
                     </x-nav-link>

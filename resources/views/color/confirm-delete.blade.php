@@ -51,7 +51,7 @@
                 </div>
                 <div class="app-card-body px-4 w-100">
                     <div class="item py-3">
-                        <form action="{{ route('color.delete', $color->id) }}" method="POST"
+                        <form action="{{ route('admin.color.delete', $color->id) }}" method="POST"
                               id="delete-form-{{ $color->id }}" style="display: inline;">
                             @csrf
                             @method('DELETE')

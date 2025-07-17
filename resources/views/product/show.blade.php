@@ -98,9 +98,9 @@
                     <div class="item border-bottom py-3">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
-                                <a href="{{ route('product.edit', $product->id) }}"><i
+                                <a href="{{ route('admin.product.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen text-warning me-2"></i></a>
-                                <a href="{{ route('product.confirm.delete', $product->id) }}"><i
+                                <a href="{{ route('admin.product.confirm.delete', $product->id) }}"><i
                                         class="fa-solid fa-trash text-danger"></i></a>
                             </div>
                         </div>

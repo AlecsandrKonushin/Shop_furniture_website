@@ -5,7 +5,7 @@
         <div class="container-xl">
             <h1 class="app-page-title">Товары</h1>
             <div class="app-card-footer p-4 mt-auto">
-                <a class="btn app-btn-secondary" href="{{ route('product.create') }}">Добавить товар</a>
+                <a class="btn app-btn-secondary" href="{{ route('admin.product.create') }}">Добавить товар</a>
             </div>
             <div class="table-responsive col-12">
                 <table class="table app-table-hover mb-0 text-left">
@@ -25,7 +25,7 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr class="align-middle">
-                            <td class="cell"><a href="{{ route('product.show', $product->id) }}">{{ $product->id }}</a>
+                            <td class="cell"><a href="{{ route('admin.product.show', $product->id) }}">{{ $product->id }}</a>
                             </td>
                             <td class="cell">{{ $product->category->title }}</td>
                             <td class="cell">{{ $product->title }}</td>
@@ -36,11 +36,11 @@
                                                               width="50" alt="Изображение"></td>
                             <td class="cell text-center">{{ $product->is_published ? 'Да' : 'Нет'}}</td>
                             <td class="cell">
-                                <a href="{{ route('product.show', $product->id) }}"><i
+                                <a href="{{ route('admin.product.show', $product->id) }}"><i
                                         class="fa-solid fa-eye me-2"></i></a>
-                                <a href="{{ route('product.edit', $product->id) }}"><i
+                                <a href="{{ route('admin.product.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen text-warning me-2"></i></a>
-                                <a href="{{ route('product.confirm.delete', $product->id) }}"><i
+                                <a href="{{ route('admin.product.confirm.delete', $product->id) }}"><i
                                         class="fa-solid fa-trash text-danger"></i></a>
                             </td>
                         </tr>

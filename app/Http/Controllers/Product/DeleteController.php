@@ -12,6 +12,6 @@ class DeleteController extends Controller
         $product->colors()->detach();
         $product->product_images()->delete();
         $product->delete();
-        return redirect()->route('product.index');
+        return redirect()->route('admin.product.index');
     }
 }

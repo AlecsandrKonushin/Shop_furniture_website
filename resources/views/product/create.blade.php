@@ -5,7 +5,7 @@
         <div class="container-xl">
             <h1 class="app-page-title">Добавление продукта</h1>
             <div class="app-card-body col-6">
-                <form class="settings-form" action="{{ route('product.store') }}" method="POST"
+                <form class="settings-form" action="{{ route('admin.product.store') }}" method="POST"
                       enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">

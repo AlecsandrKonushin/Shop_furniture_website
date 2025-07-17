@@ -10,6 +10,6 @@ class DeleteController extends Controller
     public function __invoke(Color $color)
     {
         $color->delete();
-        return redirect()->route('color.index');
+        return redirect()->route('admin.color.index');
     }
 }

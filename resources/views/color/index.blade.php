@@ -5,7 +5,7 @@
         <div class="container-xl">
             <h1 class="app-page-title">Цвета</h1>
             <div class="app-card-footer p-4 mt-auto">
-                <a class="btn app-btn-secondary" href="{{ route('color.create') }}">Добавить цвет</a>
+                <a class="btn app-btn-secondary" href="{{ route('admin.color.create') }}">Добавить цвет</a>
             </div>
             <div class="table-responsive col-6">
                 <table class="table app-table-hover mb-0 text-left">
@@ -26,10 +26,10 @@
                                 <i class="fas fa-square" style="color:{{ $color->color }}"></i>
                             </td>
                             <td class="cell">
-                                <a href="{{ route('color.show', $color->id) }}"><i class="fa-solid fa-eye me-2"></i></a>
-                                <a href="{{ route('color.edit', $color->id) }}"><i
+                                <a href="{{ route('admin.color.show', $color->id) }}"><i class="fa-solid fa-eye me-2"></i></a>
+                                <a href="{{ route('admin.color.edit', $color->id) }}"><i
                                         class="fa-solid fa-pen text-warning me-2"></i></a>
-                                <a href="{{ route('color.confirm.delete', $color->id) }}"><i
+                                <a href="{{ route('admin.color.confirm.delete', $color->id) }}"><i
                                         class="fa-solid fa-trash text-danger"></i></a>
                             </td>
                         </tr>

@@ -5,8 +5,8 @@
         <div class="container-xl">
             <div class="d-flex ">
                 <h1 class="app-page-title me-3">Категория "{{ $category->title }}"</h1>
-                <a href="{{ route('category.edit', $category->id) }}"><i class="fa-solid fa-pen text-warning me-2"></i></a>
-                <a href="{{ route('category.confirm.delete', $category->id) }}"><i
+                <a href="{{ route('admin.category.edit', $category->id) }}"><i class="fa-solid fa-pen text-warning me-2"></i></a>
+                <a href="{{ route('admin.category.confirm.delete', $category->id) }}"><i
                         class="fa-solid fa-trash text-danger"></i></a>
             </div>
             <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start col-6">

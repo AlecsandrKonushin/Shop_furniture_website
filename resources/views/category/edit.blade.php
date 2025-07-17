@@ -5,7 +5,7 @@
         <div class="container-xl">
             <h1 class="app-page-title">Редактирование категории</h1>
             <div class="app-card-body col-6">
-                <form class="settings-form" action="{{ route('category.update', $category->id) }}" method="POST">
+                <form class="settings-form" action="{{ route('admin.category.update', $category->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="mb-3">

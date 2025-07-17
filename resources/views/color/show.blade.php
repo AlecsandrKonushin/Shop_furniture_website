@@ -5,8 +5,8 @@
         <div class="container-xl">
             <div class="d-flex">
                 <h1 class="app-page-title">Цвет "{{ $color->title }}"</h1>
-                <a href="{{ route('color.edit', $color->id) }}"><i class="fa-solid fa-pen text-warning me-2"></i></a>
-                <a href="{{ route('color.confirm.delete', $color->id) }}"><i class="fa-solid fa-trash text-danger"></i></a>
+                <a href="{{ route('admin.color.edit', $color->id) }}"><i class="fa-solid fa-pen text-warning me-2"></i></a>
+                <a href="{{ route('admin.color.confirm.delete', $color->id) }}"><i class="fa-solid fa-trash text-danger"></i></a>
             </div>
             <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start col-6">
                 <div class="app-card-body px-4 w-100">
