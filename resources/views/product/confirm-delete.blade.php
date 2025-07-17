@@ -3,7 +3,7 @@
 @section('content')
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-            <h1 class="app-page-title">Продукт "{{ $product->title }}"</h1>
+            <h1 class="app-page-title">Удалить продукт "{{ $product->title }}" ?</h1>
 
             <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start col-6">
                 <div class="app-card-header p-3 border-bottom-0">
@@ -95,14 +95,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item border-bottom py-3">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <a href="{{ route('product.edit', $product->id) }}"><i
-                                        class="fa-solid fa-pen text-warning me-2"></i></a>
-                                <a href="{{ route('product.confirm.delete', $product->id) }}"><i
-                                        class="fa-solid fa-trash text-danger"></i></a>
-                            </div>
+                    <div class="app-card-body px-4 w-100">
+                        <div class="item py-3">
+                            <form action="{{ route('product.delete', $product->id) }}" method="POST"
+                                  id="delete-form-{{ $product->id }}" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger">Удалить</button>
+                            </form>
                         </div>
                     </div>
                 </div>

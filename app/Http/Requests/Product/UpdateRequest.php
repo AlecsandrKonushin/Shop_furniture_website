@@ -35,6 +35,23 @@ class UpdateRequest extends FormRequest
         ];
     }
 
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $product = $this->route('product');
+
+            $existing = $product->product_images()->count();
+            $deleted = $this->input('deleted_images', []);
+            $newImages = $this->file('product_images', []);
+
+            $remainingImages = $existing - count($deleted);
+
+            if ($remainingImages <= 0 && empty($newImages)) {
+                $validator->errors()->add('product_images', 'Нужно загрузить минимум одно изображение.');
+            }
+        });
+    }
+
     public function messages()
     {
         return [

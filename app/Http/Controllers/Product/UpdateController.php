@@ -21,24 +21,31 @@ class UpdateController extends Controller
             $data['preview_image'] = $product->preview_image;
         }
 
-//        if ($request->hasFile('product_images')) {
-//            foreach ($data['product_images'] as $key => $value) {
-//                $filePath = Storage::disk('public')->put('images', $value);
-//                ProductImages::firstOrCreate([
-//                    'product_id' => $product->id,
-//                    'file_path' => $filePath,
-//                ]);
-//            }
-//        } else {
-//            $data['product_images'] = $product->product_images;
-//        }
+        $deletedIds = $request->input('deleted_images', []);
+
+        foreach ($deletedIds as $deletedId) {
+            $image = ProductImages::find($deletedId);
+
+            if ($image) {
+                Storage::disk('public')->delete($image->file_path);
+                $image->delete();
+            }
+        }
+
+        if ($request->hasFile('product_images')) {
+            foreach ($data['product_images'] as $key => $value) {
+                $filePath = Storage::disk('public')->put('images', $value);
+                ProductImages::firstOrCreate([
+                    'product_id' => $product->id,
+                    'file_path' => $filePath,
+                ]);
+            }
+        }
 
         $colorsIds = $data['colors'];
-        unset($data['colors']);
+        unset($data['colors'], $data['product_images']);
 
         $product->colors()->detach();
-
-//        dd($colorsIds);
 
         foreach ($colorsIds as $colorIds) {
             ColorProduct::firstOrCreate([

@@ -6,7 +6,7 @@
             <h1 class="app-page-title">Редактирование продукта</h1>
             <div class="app-card-body col-6">
                 <form class="settings-form" action="{{ route('product.update', $product) }}" method="POST"
-                      enctype="multipart/form-data">
+                      enctype="multipart/form-data" id="productForm">
                     @csrf
                     @method('PATCH')
                     <div class="mb-3">
@@ -70,15 +70,21 @@
                         @enderror
 
                         <label for="product_images" class="form-label">Допольнительные изображения</label>
-                        <input name="product_images[]" type="file" class="form-control custom-file-input
+                        <input name="product_images[]" type="file" class="form-control custom-file-input mb-2
                         @error('product_images') is-invalid @enderror"
                                id="product_images"
                                multiple accept="image/*">
-                        <div class="mt-2">
-                            <p>Дополнительные изображения:</p>
+                        <p>Дополнительные изображения:</p>
+                        <div class="mt-2 d-flex">
                             @foreach($product->product_images as $product_image)
-                                <img src="{{ asset('storage/' . $product_image->file_path) }}" width="150"
-                                     alt="product_image">
+                                <div class="position-relative">
+                                    <img src="{{ asset('storage/' . $product_image->file_path) }}" width="150"
+                                         alt="product_image">
+                                    <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0"
+                                            style="z-index: 10"
+                                            onclick="removeImage({{ $product_image->id }}, this)">&times;
+                                    </button>
+                                </div>
                             @endforeach
                         </div>
                         @error('product_images')

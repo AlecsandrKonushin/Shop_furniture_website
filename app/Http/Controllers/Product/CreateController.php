@@ -10,7 +10,7 @@ class CreateController extends Controller
 {
     public function __invoke()
     {
-        $categories = Category::all();
+        $categories = Category::where('id', '>', 1)->get();
         $colors = Color::all();
         return view('product.create', compact('categories', 'colors'));
     }

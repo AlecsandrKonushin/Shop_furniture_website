@@ -25,7 +25,8 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr class="align-middle">
-                            <td class="cell"><a href="{{ route('product.show', $product->id) }}">{{ $product->id }}</a></td>
+                            <td class="cell"><a href="{{ route('product.show', $product->id) }}">{{ $product->id }}</a>
+                            </td>
                             <td class="cell">{{ $product->category->title }}</td>
                             <td class="cell">{{ $product->title }}</td>
                             <td class="cell">{{ $product->description }}</td>
@@ -39,15 +40,8 @@
                                         class="fa-solid fa-eye me-2"></i></a>
                                 <a href="{{ route('product.edit', $product->id) }}"><i
                                         class="fa-solid fa-pen text-warning me-2"></i></a>
-                                {{--                                <form action="{{ route('color.delete', $product->id) }}" method="POST"--}}
-                                {{--                                      id="delete-form-{{ $product->id }}" style="display: inline;">--}}
-                                {{--                                    @csrf--}}
-                                {{--                                    @method('DELETE')--}}
-                                {{--                                    <a href="#"--}}
-                                {{--                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $product->id }}').submit();">--}}
-                                {{--                                        <i class="fa-solid fa-trash text-danger"></i>--}}
-                                {{--                                    </a>--}}
-                                {{--                                </form>--}}
+                                <a href="{{ route('product.confirm.delete', $product->id) }}"><i
+                                        class="fa-solid fa-trash text-danger"></i></a>
                             </td>
                         </tr>
                     @endforeach

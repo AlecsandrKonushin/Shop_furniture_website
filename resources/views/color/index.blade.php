@@ -29,15 +29,8 @@
                                 <a href="{{ route('color.show', $color->id) }}"><i class="fa-solid fa-eye me-2"></i></a>
                                 <a href="{{ route('color.edit', $color->id) }}"><i
                                         class="fa-solid fa-pen text-warning me-2"></i></a>
-                                <form action="{{ route('color.delete', $color->id) }}" method="POST"
-                                      id="delete-form-{{ $color->id }}" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="#"
-                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $color->id }}').submit();">
-                                        <i class="fa-solid fa-trash text-danger"></i>
-                                    </a>
-                                </form>
+                                <a href="{{ route('color.confirm.delete', $color->id) }}"><i
+                                        class="fa-solid fa-trash text-danger"></i></a>
                             </td>
                         </tr>
                     @endforeach
