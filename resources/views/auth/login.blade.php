@@ -1,4 +1,4 @@
-@extends('layouts.main-login')
+@extends('layouts.auth.main')
 
 @section('content')
     <body class="app app-login p-0">
@@ -40,8 +40,11 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Вход
-                                </button>
+                                <form action="{{ route('login') }}" method="POST">
+                                    @csrf
+                                    <input type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto"
+                                           value="Вход">
+                                </form>
                             </div>
                         </form>
                     </div>

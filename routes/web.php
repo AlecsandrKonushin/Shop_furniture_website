@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('/admin')->name('admin.')->group(function () {
+require __DIR__ . '/auth.php';
+
+Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     Route::get('/', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
-    Route::prefix('/login')->name('login.')->group(function () {
-        Route::get('/', \App\Http\Controllers\Login\IndexController::class)->name('index');
-    });
+//    Route::prefix('/login')->name('login.')->group(function () {
+//        Route::get('/', \App\Http\Controllers\Login\IndexController::class)->name('index');
+//    });
 
     Route::prefix('/products')->name('product.')->group(function () {
         Route::get('/', \App\Http\Controllers\Product\IndexController::class)->name('index');
