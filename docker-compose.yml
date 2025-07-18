@@ -23,6 +23,7 @@ services:
             - sail
         depends_on:
             - mysql
+            - mailpit
         container_name: app
     mysql:
         image: 'mysql/mysql-server:8.0'
@@ -49,6 +50,13 @@ services:
             retries: 3
             timeout: 5s
         container_name: mysql
+    mailpit:
+        image: axllent/mailpit
+        ports:
+            - "8025:8025"
+            - "1025:1025"
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge

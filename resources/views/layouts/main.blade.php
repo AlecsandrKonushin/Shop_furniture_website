@@ -223,10 +223,18 @@
                 </ul>
             </nav>
 
+            @if(!auth()->user()->hasVerifiedEmail())
+                <div class="app-sidepanel-footer p-3">
+                    <a href="{{ route('verification.notice') }}" class="btn btn-success">Подтвердить почту</a>
+                </div>
+            @endif
+            <div class="app-sidepanel-footer p-3">
+                <a href="{{ route('password.request') }}" class="btn btn-warning">Сбросить пароль</a>
+            </div>
             <div class="app-sidepanel-footer p-3">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <input type="submit" class="btn btn-danger" href="{{ route('') }}" value="Выход">
+                    <input type="submit" class="btn btn-danger" value="Выход">
                 </form>
             </div>
 
