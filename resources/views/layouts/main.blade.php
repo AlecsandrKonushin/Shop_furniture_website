@@ -216,7 +216,7 @@
                         <span class="nav-icon"><i class="fa-solid fa-palette fa-lg"></i></span>
                         <span class="nav-link-text">Цвета</span>
                     </x-nav-link>
-                    <x-nav-link href="{{ route('admin.website.index') }}" route="website.index">
+                    <x-nav-link href="{{ route('client.index') }}" route="website.index">
                         <span class="nav-icon"><i class="fa-solid fa-window-maximize fa-lg"></i></span>
                         <span class="nav-link-text">Сайт</span>
                     </x-nav-link>

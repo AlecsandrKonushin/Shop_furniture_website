@@ -2,21 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::view('/', 'client.index')->name('client.index');
+
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {
-        return redirect()->route('admin.main.index');
-    })->name('home');
-
-    Route::get('/home', function () {
-        return redirect()->route('admin.main.index');
-    })->name('home');
-
     Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
         Route::get('/', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
+        Route::get('/home', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
         Route::prefix('/products')->name('product.')->group(function () {
             Route::get('/', \App\Http\Controllers\Product\IndexController::class)->name('index');
