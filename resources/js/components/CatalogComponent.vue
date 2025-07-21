@@ -96,19 +96,11 @@
                                 </div>
                                 <div class="shop_top_right d-flex">
                                     <div class="product_sorting">
-                                        <select>
-                                            <option selected value="1">Default Sorting</option>
-                                            <option value="1">Default Sorting2</option>
-                                            <option value="1">Default Sorting3</option>
-                                            <option value="1">Default Sorting3</option>
-                                        </select>
-                                    </div>
-                                    <div class="shop_filter">
-                                        <select>
-                                            <option selected value="1">Filter</option>
-                                            <option value="1">Filter2</option>
-                                            <option value="1">Filter3</option>
-                                            <option value="1">Filter4</option>
+                                        <select v-model="sortOption" @change="getProducts">
+                                            <option selected value="alpha_asc">По алфавиту (возрастание)</option>
+                                            <option value="alpha_desc">По алфавиту (убывание)</option>
+                                            <option value="price_asc">По цене (минимальная)</option>
+                                            <option value="price_desc">По цене (максимальная)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -155,6 +147,7 @@ const meta = ref({
     minPrice: null,
     maxPrice: null
 })
+const sortOption = ref('alpha_asc')
 const currentCategoryId = ref()
 const selectedColors = ref([])
 const minPrice = ref()
@@ -222,7 +215,8 @@ function getProducts() {
             category_id: currentCategoryId.value,
             colors: selectedColors.value,
             minPrice: minPrice.value,
-            maxPrice: maxPrice.value
+            maxPrice: maxPrice.value,
+            sortOption: sortOption.value
         }
     })
         .then(res => {

@@ -28,6 +28,7 @@ class ProductsRequest extends FormRequest
             'colors.*' => 'integer',
             'minPrice' => 'required|integer|min:1',
             'maxPrice' => 'required|integer|min:1',
+            'sortOption' => 'required|string|in:alpha_asc,alpha_desc,price_asc,price_desc'
         ];
     }
 }

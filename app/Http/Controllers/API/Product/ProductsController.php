@@ -27,7 +27,23 @@ class ProductsController extends Controller
             });
         }
 
+        switch ($data['sortOption']) {
+            case 'alpha_asc':
+                $query->orderBy('title', 'asc');
+                break;
+            case 'alpha_desc':
+                $query->orderBy('title', 'desc');
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+        }
+
         $products = $query->paginate(9);
+
         return response()->json($products);
     }
 }

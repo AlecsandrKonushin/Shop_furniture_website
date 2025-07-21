@@ -6363,7 +6363,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: normal;
   font-size: 24px;
   line-height: 94.3%;
-  text-transform: capitalize;
+  text-transform: none;
   margin-bottom: 0;
 }
 @media only screen and (max-width: 767px) {
@@ -6404,7 +6404,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: 500;
   font-size: 18px;
   line-height: 202.8%;
-  text-transform: capitalize;
+  text-transform: none;
   color: #9F9F9F;
 }
 .widget_categories ul li a:hover {
@@ -6618,7 +6618,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   padding: 0;
   font-size: 18px;
   line-height: 27px;
-  text-transform: capitalize;
+  text-transform: none;
   color: #9F9F9F;
   cursor: pointer;
 }
