@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function __invoke()
     {
         $productsCount = Product::all()->count();
-        $categoriesCount = Category::all()->count();
+        $categoriesCount = Category::where('id', '>', 1)->count();
         $colorsCount = Color::all()->count();
         return view('main.index', compact('productsCount', 'categoriesCount', 'colorsCount'));
     }

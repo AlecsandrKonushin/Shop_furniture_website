@@ -32,29 +32,26 @@
                                 <div class="shop_widget_title categories_title">
                                     <h3>Категории</h3>
                                 </div>
-                                <div class="widget_categories">
+                                <div v-if="categories" class="widget_categories">
                                     <ul>
-                                        <li><a href="#">Lighting(12)</a></li>
-                                        <li><a href="#">Desk(2)</a></li>
-                                        <li><a href="#">Bedroom(26)</a></li>
-                                        <li><a href="#">Chair(11)</a></li>
-                                        <li><a href="#">Accessories(13)</a></li>
-                                        <li><a href="#">Furniture(23)</a></li>
+                                        <li v-for="category in categories">
+                                            <a href="#">{{ category.title }}({{ category.products_count }})</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="shop_widget_list">
-                                <div class="shop_widget_title">
-                                    <h3>by prices</h3>
-                                </div>
-                                <div class="widget_proce_filter">
-                                    <form action="#">
-                                        <input type="text" id="amount">
-                                        <div id="slider-range"></div>
-                                        <button type="submit">Filter Price</button>
-                                    </form>
-                                </div>
-                            </div>
+                            <!--                            <div class="shop_widget_list">-->
+                            <!--                                <div class="shop_widget_title">-->
+                            <!--                                    <h3>by prices</h3>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="widget_proce_filter">-->
+                            <!--                                    <form action="#">-->
+                            <!--                                        <input type="text" id="amount">-->
+                            <!--                                        <div id="slider-range"></div>-->
+                            <!--                                        <button type="submit">Filter Price</button>-->
+                            <!--                                    </form>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                             <div class="shop_widget_list">
                                 <div class="shop_widget_title">
                                     <h3>by colors</h3>
@@ -118,238 +115,20 @@
                             </div>
                             <div class="shop_gallery">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div v-if="products" v-for="product in products" class="col-lg-4 col-md-4 col-sm-6">
                                         <article class="single_product">
                                             <figure>
                                                 <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                    <div class="label_product">
-                                                        <span class="label_sale">Sale</span>
-                                                    </div>
+                                                    <a href="#"><img :src="`/storage/` + product.preview_image" alt=""></a>
+<!--                                                    <div class="label_product">-->
+<!--                                                        <span class="label_sale">Sale</span>-->
+<!--                                                    </div>-->
                                                 </div>
                                                 <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Tufted accent chair with wood
-                                                        legs, Beige</a></h4>
+                                                    <h4><a href="#">{{ product.title }}</a></h4>
                                                     <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                    <div class="label_product">
-                                                        <span class="label_hot">hot</span>
-                                                    </div>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Kendal Dark Teal Fabric Accent
-                                                        Chair</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Tufted accent chair with wood
-                                                        legs, Beige</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Kendal Dark Teal Fabric Accent
-                                                        Chair</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                    <div class="label_product">
-                                                        <span class="label_hot">hot</span>
-                                                    </div>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html"> Contemporary Round Living Room
-                                                        Coffee</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                    <div class="label_product">
-                                                        <span class="label_sale">Sale</span>
-                                                    </div>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Tufted accent chair with wood
-                                                        legs, Beige</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                    <div class="label_product">
-                                                        <span class="label_sale">Sale</span>
-                                                    </div>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html"> Contemporary Round Living Room
-                                                        Coffee</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Kendal Dark Teal Fabric Accent
-                                                        Chair</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Tufted accent chair with wood
-                                                        legs, Beige</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Kendal Dark Teal Fabric Accent
-                                                        Chair</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                    <div class="label_product">
-                                                        <span class="label_sale">Sale</span>
-                                                    </div>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Kendal Dark Teal Fabric Accent
-                                                        Chair</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </article>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
-                                            <figure>
-                                                <div class="product_thumb">
-                                                    <a href="single-product.html"><img
-                                                        src="" alt=""></a>
-                                                </div>
-                                                <figcaption class="product_content">
-                                                    <h4><a href="single-product.html">Tufted accent chair with wood
-                                                        legs, Beige</a></h4>
-                                                    <div class="price_box">
-                                                        <span class="old_price">$399.99</span>
-                                                        <span class="current_price">$129.99</span>
+<!--                                                        <span class="old_price">$399.99</span>-->
+                                                        <span class="current_price">{{ product.price }} руб  </span>
                                                     </div>
                                                 </figcaption>
                                             </figure>
@@ -382,17 +161,29 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
-const categories = ref();
+const categories = ref([]);
+const products = ref([]);
+const page = ref(1);
 
 onMounted(() => {
+    getCategories()
     getProducts()
 })
 
-function getProducts() {
-    categories.value = axios.get('/api/categories/withCount')
+function getCategories() {
+    axios.get('/api/categories/withCount')
         .then((res) => {
-            console.log(res);
-            // categories.value = res.data
+            categories.value = res.data.data
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+function getProducts() {
+    axios.get('/api/products', {params: {page: page.value, category_id: 13}})
+        .then(res => {
+            products.value = res.data
         })
         .catch(err => {
             console.log(err);
