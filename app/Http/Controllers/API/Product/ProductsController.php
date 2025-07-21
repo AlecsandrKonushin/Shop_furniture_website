@@ -17,6 +17,9 @@ class ProductsController extends Controller
             $query->where('category_id', $data['category_id']);
         }
 
+        $query->where('price', '>=', $data['minPrice']);
+        $query->where('price', '<=', $data['maxPrice']);
+
         if (!empty($data['colors'])) {
             $colors = $data['colors'];
             $query->whereHas('colors', function ($query) use ($colors) {

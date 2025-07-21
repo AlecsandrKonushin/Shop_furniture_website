@@ -1,9 +1,9 @@
 (function ($) {
     "use strict";
-    
-    new WOW().init();  
-    
-    
+
+    new WOW().init();
+
+
     /*---background image---*/
 	function dataBackgroundImage() {
 		$('[data-bgimg]').each(function () {
@@ -13,8 +13,8 @@
 			});
 		});
     }
-    
-    
+
+
     $(window).on('load', function () {
         dataBackgroundImage();
     });
@@ -37,7 +37,7 @@
           nextArrow:'<button class="next_arrow"><i class="ion-ios-arrow-right"></i></button>',
         });
     };
-    
+
 
     /*swiper container activation*/
     var swiper = new Swiper('.testimonial_swiper', {
@@ -46,21 +46,21 @@
         breakpoints: {
             1200: {
                 spaceBetween: 90,
-                
+
             },
             992: {
                 spaceBetween: 30,
-                
+
             },
             768: {
               slidesPerView: 2,
               spaceBetween: 30,
-              
+
             },
             320: {
                 slidesPerView: 1,
                 spaceBetween: 30,
-                
+
             },
         },
         pagination: {
@@ -110,11 +110,11 @@
         delay: 20,
         time: 1000
     });
-    
-    
+
+
     $('.select_option').niceSelect();
- 
-    
+
+
       /*---  ScrollUp Active ---*/
       $.scrollUp({
         scrollText: '<i class="ion-android-arrow-up"></i>',
@@ -122,19 +122,19 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-    
+
 
     $('#nav-tab a').on('click', function (e) {
         e.preventDefault()
         $(this).tab('show')
       })
-    
+
 
     /*---canvas menu activation---*/
     $('.canvas_open').on('click', function(){
         $('.offcanvas_menu_wrapper,.body_overlay').addClass('active')
     });
-    
+
     $('.canvas_close,.body_overlay').on('click', function(){
         $('.offcanvas_menu_wrapper,.body_overlay').removeClass('active')
     });
@@ -142,9 +142,9 @@
     var $offcanvasNav = $('.offcanvas_main_menu'),
         $offcanvasNavSubMenu = $offcanvasNav.find('.sub-menu');
     $offcanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="fa fa-angle-down"></i></span>');
-    
+
     $offcanvasNavSubMenu.slideUp();
-    
+
     $offcanvasNav.on('click', 'li a, li .menu-expand', function(e) {
         var $this = $(this);
         if ( ($this.parent().attr('class').match(/\b(menu-item-has-children|has-children|has-sub-menu)\b/)) && ($this.attr('href') === '#' || $this.hasClass('menu-expand')) ) {
@@ -163,29 +163,11 @@
         }
     });
 
-   
-   
-    /************************************************
-     * Price Slider
-     ***********************************************/
-    $("#slider-range").slider({
-        range: true,
-        min: 0,
-        max: 500,
-        values: [12, 500],
-        slide: function(event, ui) {
-            $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-        }
-    });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-        " - $" + $("#slider-range").slider("values", 1));
-  
-    
 
     //Quantity Counter
     $(".pro-qty").append('<a href="#" class="inc qty-btn">+</a>');
       $(".pro-qty").prepend('<a href="#" class= "dec qty-btn">-</a>');
-    
+
       $(".qty-btn").on("click", function (e) {
         e.preventDefault();
         var $button = $(this);
@@ -203,7 +185,7 @@
         $button.parent().find("input").val(newVal);
     });
 
-    
+
     /*---MailChimp---*/
     $('#mc-form').ajaxChimp({
         language: 'en',
@@ -221,11 +203,11 @@
 
         } else if(resp.result === 'error') {
             $('.mailchimp-error').html('' + resp.msg).fadeIn(900);
-        }  
+        }
     }
- 
 
-    
-    
-    
-})(jQuery);	
+
+
+
+
+})(jQuery);

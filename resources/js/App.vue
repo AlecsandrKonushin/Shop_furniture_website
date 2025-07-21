@@ -168,8 +168,6 @@
                         </div>
                         <div class="footer_bottom">
                             <div class="copyright_right text-center">
-                                <p>&copy; 2021 All rights reserved Made with <i class="ion-heart"></i> by <a
-                                    href="https://hasthemes.com">HasThemes</a></p>
                             </div>
                         </div>
                     </div>

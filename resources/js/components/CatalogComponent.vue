@@ -34,10 +34,10 @@
                                 </div>
                                 <div v-if="categories" class="widget_categories">
                                     <ul>
-                                        <li v-if="products">
+                                        <li v-if="meta">
                                             <a :class="{ active: isSelectedCategory(0)}"
                                                @click.prevent="getAllProducts()"
-                                               href="#">Все({{ countProducts }})</a>
+                                               href="#">Все({{ meta.countProducts }})</a>
                                         </li>
                                         <li v-for="category in categories">
                                             <a :class="{ active: isSelectedCategory(category.id)}"
@@ -47,18 +47,26 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!--                            <div class="shop_widget_list">-->
-                            <!--                                <div class="shop_widget_title">-->
-                            <!--                                    <h3>by prices</h3>-->
-                            <!--                                </div>-->
-                            <!--                                <div class="widget_proce_filter">-->
-                            <!--                                    <form action="#">-->
-                            <!--                                        <input type="text" id="amount">-->
-                            <!--                                        <div id="slider-range"></div>-->
-                            <!--                                        <button type="submit">Filter Price</button>-->
-                            <!--                                    </form>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
+                            <div class="shop_widget_list">
+                                <div class="shop_widget_title">
+                                    <h3>По цене</h3>
+                                </div>
+                                <div class="widget_proce_filter">
+                                    <form action="#">
+                                        <input type="text" id="amount">
+                                        <div id="slider-range"
+                                             class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                            <div class="ui-slider-range ui-corner-all ui-widget-header"
+                                                 style="left: 0%; width: 100%;"></div>
+                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"
+                                                  style="left: 0%;"></span><span tabindex="0"
+                                                                                 class="ui-slider-handle ui-corner-all ui-state-default"
+                                                                                 style="left: 100%;">
+                                        </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="shop_widget_list">
                                 <div class="shop_widget_title">
                                     <h3>По цветам</h3>
@@ -76,7 +84,7 @@
                                 <div class="widget_categories">
                                     <ul>
                                         <li>
-                                            <a @click.prevent="resetColors" class="" href="#">Сбросить цвет</a>
+                                            <a @click.prevent="resetColors" class="" href="#">Сбросить цвета</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -132,7 +140,6 @@
         </div>
     </div>
 
-
 </template>
 
 <script setup>
@@ -143,18 +150,37 @@ import axios from "axios";
 const categories = ref([])
 const colors = ref([])
 const products = ref([])
-const countProducts = ref()
+const meta = ref({
+    countProducts: null,
+    minPrice: null,
+    maxPrice: null
+})
 const currentCategoryId = ref()
 const selectedColors = ref([])
+const minPrice = ref()
+const maxPrice = ref()
 const page = ref(1)
 
 onMounted(() => {
-    countProducts.value = 8
-
+    getMetaProducts()
     getCategories()
     getColors()
-    getAllProducts()
 })
+
+function getMetaProducts() {
+    axios.get('/api/products/metaProducts')
+        .then(res => {
+            meta.value = res.data
+            minPrice.value = meta.value.minPrice
+            maxPrice.value = meta.value.maxPrice
+
+            changePriceSlider()
+            getAllProducts()
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
 
 function getCategories() {
     axios.get('/api/categories/withCount')
@@ -187,20 +213,17 @@ function getProductsByCategory(idCategory) {
     currentCategoryId.value = idCategory
 
     getProducts()
-
-    // axios.get('/api/products/withCategory', {params: {page: page.value, category_id: idCategory}})
-    //     .then(res => {
-    //         products.value = res.data.data
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
 }
 
 function getProducts() {
     axios.get('/api/products', {
-        params:
-            {page: page.value, category_id: currentCategoryId.value, colors: selectedColors.value}
+        params: {
+            page: page.value,
+            category_id: currentCategoryId.value,
+            colors: selectedColors.value,
+            minPrice: minPrice.value,
+            maxPrice: maxPrice.value
+        }
     })
         .then(res => {
             products.value = res.data.data
@@ -220,6 +243,28 @@ function selectColor(idColor) {
     }
 
     getProducts()
+}
+
+function changePriceSlider() {
+    if (meta.value) {
+        $("#slider-range").slider({
+            range: true,
+            min: Number(meta.value.minPrice),
+            max: Number(meta.value.maxPrice),
+            values: [Number(meta.value.minPrice), Number(meta.value.maxPrice)],
+            slide: function (event, ui) {
+                $("#amount").val("" + ui.values[0] + " - " + ui.values[1]);
+            },
+            stop: function (event, ui) {
+                minPrice.value = ui.values[0]
+                maxPrice.value = ui.values[1]
+                getProducts()
+            }
+        });
+
+        const values = $("#slider-range").slider("values");
+        $("#amount").val("" + values[0] + " - " + values[1]);
+    }
 }
 
 function resetColors() {

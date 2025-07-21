@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('title');
             $table->text('description');
             $table->string('preview_image');
-            $table->string('price');
-            $table->string('count');
+            $table->integer('price');
+            $table->integer('count');
             $table->boolean('is_published')->default(true);
             $table->foreignId('category_id')->nullable()->index()->constrained('categories')->onDelete('set null');
             $table->timestamps();
