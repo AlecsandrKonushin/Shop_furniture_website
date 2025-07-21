@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Category\CategoryWithCountResource;
 use App\Models\Category;
 
-class WithCountController extends Controller
+class CategoriesWithCountController extends Controller
 {
     public function __invoke()
     {

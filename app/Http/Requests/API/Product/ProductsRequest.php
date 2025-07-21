@@ -4,7 +4,7 @@ namespace App\Http\Requests\API\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CatalogProductsRequest extends FormRequest
+class ProductsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,9 @@ class CatalogProductsRequest extends FormRequest
     {
         return [
             'page' => 'required|integer|min:1',
-            'category_id' => 'required|integer|exists:categories,id',
+            'category_id' => 'required|integer',
+            'colors' => 'array',
+            'colors.*' => 'integer',
         ];
     }
 }

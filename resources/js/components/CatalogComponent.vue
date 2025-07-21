@@ -34,8 +34,15 @@
                                 </div>
                                 <div v-if="categories" class="widget_categories">
                                     <ul>
+                                        <li v-if="products">
+                                            <a :class="{ active: isSelectedCategory(0)}"
+                                               @click.prevent="getAllProducts()"
+                                               href="#">Все({{ countProducts }})</a>
+                                        </li>
                                         <li v-for="category in categories">
-                                            <a href="#">{{ category.title }}({{ category.products_count }})</a>
+                                            <a :class="{ active: isSelectedCategory(category.id)}"
+                                               @click.prevent="getProductsByCategory(category.id)"
+                                               href="#">{{ category.title }}({{ category.products_count }})</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -54,40 +61,25 @@
                             <!--                            </div>-->
                             <div class="shop_widget_list">
                                 <div class="shop_widget_title">
-                                    <h3>by colors</h3>
+                                    <h3>По цветам</h3>
                                 </div>
-                                <div class="widget_color">
+                                <div v-if="colors" class="widget_color pb-3">
                                     <ul>
-                                        <li><a class="color1" href="javascript:void(0)"></a></li>
-                                        <li><a class="color2" href="javascript:void(0)"></a></li>
-                                        <li><a class="color3" href="javascript:void(0)"></a></li>
-                                        <li><a class="color4" href="javascript:void(0)"></a></li>
-                                        <li><a class="color5" href="javascript:void(0)"></a></li>
-                                        <li><a class="color6" href="javascript:void(0)"></a></li>
-                                        <li><a class="color7" href="javascript:void(0)"></a></li>
+                                        <li v-for="color in colors">
+                                            <a :class="{active: isSelectedColor(color.id)}"
+                                               @click.prevent="selectColor(color.id)"
+                                               :style="{background: '#' + color.color}"
+                                               href="#"></a>
+                                        </li>
                                     </ul>
                                 </div>
-                                <div class="widget_color_btn">
-                                    <a href="#">FILTER COLOR</a>
-                                </div>
-                            </div>
-                            <div class="shop_widget_list">
-                                <div class="shop_widget_title">
-                                    <h3>Tags cloud</h3>
-                                </div>
-                                <div class="widget_tags">
+                                <div class="widget_categories">
                                     <ul>
-                                        <li><a href="#">FURNITURE</a></li>
-                                        <li><a href="#">DECOR</a></li>
-                                        <li><a href="#">INTERIOR</a></li>
-                                        <li><a href="#">Bed room</a></li>
-                                        <li><a href="#">Plants</a></li>
-                                        <li><a href="#">bath room</a></li>
+                                        <li>
+                                            <a @click.prevent="resetColors" class="" href="#">Сбросить цвет</a>
+                                        </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="shop_widget_thumb">
-                                <img src="" alt="">
                             </div>
                         </div>
                         <div class="shop_right_sidaber">
@@ -116,18 +108,15 @@
                             <div class="shop_gallery">
                                 <div class="row">
                                     <div v-if="products" v-for="product in products" class="col-lg-4 col-md-4 col-sm-6">
-                                        <article class="single_product">
+                                        <article class="single_product h-100 d-flex flex-column">
                                             <figure>
-                                                <div class="product_thumb">
+                                                <div class="product_thumb"
+                                                     style="height: 300px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                                                     <a href="#"><img :src="`/storage/` + product.preview_image" alt=""></a>
-<!--                                                    <div class="label_product">-->
-<!--                                                        <span class="label_sale">Sale</span>-->
-<!--                                                    </div>-->
                                                 </div>
                                                 <figcaption class="product_content">
                                                     <h4><a href="#">{{ product.title }}</a></h4>
                                                     <div class="price_box">
-<!--                                                        <span class="old_price">$399.99</span>-->
                                                         <span class="current_price">{{ product.price }} руб  </span>
                                                     </div>
                                                 </figcaption>
@@ -135,16 +124,6 @@
                                         </article>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="loding_bar">
-                                <ul class="d-flex justify-content-center">
-                                    <li><a href="#">01</a></li>
-                                    <li><a href="#">02</a></li>
-                                    <li><a href="#">03</a></li>
-                                    <li><a href="#">04</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -161,13 +140,20 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
-const categories = ref([]);
-const products = ref([]);
-const page = ref(1);
+const categories = ref([])
+const colors = ref([])
+const products = ref([])
+const countProducts = ref()
+const currentCategoryId = ref()
+const selectedColors = ref([])
+const page = ref(1)
 
 onMounted(() => {
+    countProducts.value = 8
+
     getCategories()
-    getProducts()
+    getColors()
+    getAllProducts()
 })
 
 function getCategories() {
@@ -176,18 +162,77 @@ function getCategories() {
             categories.value = res.data.data
         })
         .catch(err => {
-            console.log(err);
+            console.log(err)
         })
 }
 
-function getProducts() {
-    axios.get('/api/products', {params: {page: page.value, category_id: 13}})
+function getColors() {
+    axios.get('/api/colors')
         .then(res => {
-            products.value = res.data
+            colors.value = res.data
         })
         .catch(err => {
-            console.log(err);
+            console.log(err)
         })
+}
+
+function getAllProducts() {
+    currentCategoryId.value = 0
+    selectedColors.value = []
+
+    getProducts()
+}
+
+function getProductsByCategory(idCategory) {
+    currentCategoryId.value = idCategory
+
+    getProducts()
+
+    // axios.get('/api/products/withCategory', {params: {page: page.value, category_id: idCategory}})
+    //     .then(res => {
+    //         products.value = res.data.data
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+}
+
+function getProducts() {
+    axios.get('/api/products', {
+        params:
+            {page: page.value, category_id: currentCategoryId.value, colors: selectedColors.value}
+    })
+        .then(res => {
+            products.value = res.data.data
+        })
+        .catch(err =>
+            console.log(err)
+        )
+}
+
+function selectColor(idColor) {
+    const indexColor = selectedColors.value.indexOf(idColor)
+
+    if (indexColor === -1) {
+        selectedColors.value.push(idColor)
+    } else {
+        selectedColors.value.splice(indexColor, 1)
+    }
+
+    getProducts()
+}
+
+function resetColors() {
+    selectedColors.value = []
+    getProducts()
+}
+
+function isSelectedCategory(idCategory) {
+    return currentCategoryId.value === idCategory
+}
+
+function isSelectedColor(idColor) {
+    return selectedColors.value.includes(idColor)
 }
 
 </script>

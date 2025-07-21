@@ -1,4 +1,4 @@
-/*  
+/*
     CSS INDEX
     =========================================
     01. header css here
@@ -129,7 +129,7 @@ figure {
   margin: 0;
 }
 
-/*-- 
+/*--
     - Common Classes
 -----------------------------------------*/
 .fix {
@@ -328,7 +328,7 @@ figure {
   color: #000000;
 }
 
-/*-- 
+/*--
     - Background color
 -----------------------------------------*/
 .bg-white {
@@ -343,7 +343,7 @@ figure {
   background: #354b65;
 }
 
-/*-- 
+/*--
     - Input Placeholder
 -----------------------------------------*/
 input:-moz-placeholder, textarea:-moz-placeholder {
@@ -366,8 +366,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
-/*-- 
-    Scroll Up 
+/*--
+    Scroll Up
 -----------------------------------------*/
 #scrollUp {
   background: #e5c592 none repeat scroll 0 0;
@@ -6386,6 +6386,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .widget_categories ul li:last-child {
   margin-bottom: 0;
 }
+.widget_categories a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .widget_categories ul li {
     margin-bottom: 22px;
@@ -6519,9 +6523,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   opacity: 0;
   transition: 0.3s;
 }
-.widget_color ul li a:focus::before {
-  opacity: 1;
+.widget_color ul li a.active::before {
+    opacity: 1;
 }
+/*.widget_color ul li a:focus::before {*/
+/*  opacity: 1;*/
+/*}*/
 
 .widget_color_btn a {
   font-weight: 500;
