@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Product\ProductsRequest;
 use App\Models\Product;
 
-class ProductsController extends Controller
+class IndexController extends Controller
 {
     public function __invoke(ProductsRequest $request)
     {

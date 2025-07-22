@@ -11,6 +11,7 @@ Route::prefix('/colors')->group(function () {
 });
 
 Route::prefix('/products')->group(function () {
-    Route::get('/', \App\Http\Controllers\API\Product\ProductsController::class);
+    Route::get('/', \App\Http\Controllers\API\Product\IndexController::class);
     Route::get('/metaProducts', \App\Http\Controllers\API\Product\MetaProductsController::class);
+    Route::get('/{product}', \App\Http\Controllers\API\Product\ShowController::class);
 });

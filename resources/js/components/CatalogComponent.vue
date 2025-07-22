@@ -112,7 +112,8 @@
                                             <figure>
                                                 <div class="product_thumb"
                                                      style="height: 300px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                                                    <a href="#"><img :src="`/storage/` + product.preview_image" alt=""></a>
+                                                    <a @click.prevent="showProduct(product.id)" href="#"><img :src="`/storage/` + product.preview_image"
+                                                                          alt=""></a>
                                                 </div>
                                                 <figcaption class="product_content">
                                                     <h4><a href="#">{{ product.title }}</a></h4>
@@ -138,6 +139,7 @@
 
 import {onMounted, ref} from "vue";
 import axios from "axios";
+import router from "../router/router.js";
 
 const categories = ref([])
 const colors = ref([])
@@ -272,6 +274,10 @@ function isSelectedCategory(idCategory) {
 
 function isSelectedColor(idColor) {
     return selectedColors.value.includes(idColor)
+}
+
+function showProduct(idProduct) {
+    router.push({name: 'product', params: {id: idProduct}})
 }
 
 </script>

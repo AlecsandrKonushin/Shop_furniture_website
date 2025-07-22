@@ -1,10 +1,11 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import IndexComponent from "../components/IndexComponent.vue";
 import CatalogComponent from "../components/CatalogComponent.vue";
+import ProductComponent from "../components/ProductComponent.vue";
 
 const routes = [
     {path: '/', name: 'index', component: CatalogComponent},
     {path: '/catalog', name: 'catalog', component: CatalogComponent},
+    {path: '/product/:id', name: 'product', component: ProductComponent},
 ]
 
 const router = createRouter({

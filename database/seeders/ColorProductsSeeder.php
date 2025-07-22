@@ -23,6 +23,16 @@ class ColorProductsSeeder extends Seeder
                 'color_id' => 4,
                 'product_id' => 2
             ],
+            // Delete after test colors
+            [
+                'color_id' => 2,
+                'product_id' => 2
+            ],
+            // Delete after test colors
+            [
+                'color_id' => 7,
+                'product_id' => 2
+            ],
             [
                 'color_id' => 2,
                 'product_id' => 3

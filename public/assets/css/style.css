@@ -5432,7 +5432,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .product_gallery_section {
-  padding: 150px 0 88px;
+  padding: 50px 0 88px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .product_gallery_section {
@@ -5561,7 +5561,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-bottom: 8px;
 }
 .product_price_box span {
-  font-size: 24px;
+  font-size: 28px;
   line-height: 36px;
   color: #AB6E35;
 }
@@ -5728,7 +5728,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .product_d_info {
-  margin-bottom: 180px;
+  margin-bottom: 50px;
 }
 .product_d_info .container {
   max-width: 1200px;
@@ -5889,7 +5889,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     width: 100%;
   }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 500px) {
   .product_info_thumb img {
     width: 100%;
   }
@@ -5927,8 +5927,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .product_info_content h4 {
   font-weight: normal;
-  font-size: 32px;
-  line-height: 43px;
+  font-size: 28px;
+  line-height: 40px;
   letter-spacing: -1.14286px;
   color: #181818;
   margin-bottom: 30px;
@@ -5957,14 +5957,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .product_info_content p {
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
-  line-height: 36px;
+  font-size: 16px;
+  line-height: 22px;
   color: #6D6D6D;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .product_info_content p {
     font-size: 16px;
-    line-height: 34px;
+    line-height: 20px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {

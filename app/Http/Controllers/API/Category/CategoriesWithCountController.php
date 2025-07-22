@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Category\CategoryWithCountResource;
+use App\Http\Resources\API\Category\CategoryWithCountResource;
 use App\Models\Category;
 
 class CategoriesWithCountController extends Controller
