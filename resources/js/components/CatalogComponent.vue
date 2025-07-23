@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="shop_page_section">
+    <div class="shop_page_section" id="shop_page_section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -41,7 +41,7 @@
                                         </li>
                                         <li v-for="category in categories">
                                             <a :class="{ active: isSelectedCategory(category.id)}"
-                                               @click.prevent="getProductsByCategory(category.id)"
+                                               @click.prevent="selectCategory(category.id)"
                                                href="#">{{ category.title }}({{ category.products_count }})</a>
                                         </li>
                                     </ul>
@@ -137,9 +137,11 @@
 
 <script setup>
 
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import axios from "axios";
 import router from "../router/router.js";
+
+const scrollToElement = inject('scrollToElement')
 
 const categories = ref([])
 const colors = ref([])
@@ -204,10 +206,11 @@ function getAllProducts() {
     getProducts()
 }
 
-function getProductsByCategory(idCategory) {
+function selectCategory(idCategory) {
     currentCategoryId.value = idCategory
 
     getProducts()
+    scrollToElement('shop_page_section')
 }
 
 function getProducts() {
@@ -255,6 +258,7 @@ function changePriceSlider() {
                 minPrice.value = ui.values[0]
                 maxPrice.value = ui.values[1]
                 getProducts()
+                scrollToElement('shop_page_section')
             }
         });
 
@@ -266,6 +270,7 @@ function changePriceSlider() {
 function resetColors() {
     selectedColors.value = []
     getProducts()
+    scrollToElement('shop_page_section')
 }
 
 function isSelectedCategory(idCategory) {

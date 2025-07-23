@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
     <div>
         <header class="header_section header_other">
@@ -16,26 +12,26 @@
                             <div class="main_menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex">
-<!--                                        <li><a href="#">Home</a>-->
-<!--                                            <ul class="sub_menu">-->
-<!--                                                <li><a href="#">Home 1</a></li>-->
-<!--                                                <li><a href="#">Home 2</a></li>-->
-<!--                                            </ul>-->
-<!--                                        </li>-->
-<!--                                        <li><a href="#">Pages</a>-->
-<!--                                            <ul class="sub_menu">-->
-<!--                                                <li><a href="#">About Us</a></li>-->
-<!--                                                <li><a href="#">Contact Us</a></li>-->
-<!--                                            </ul>-->
-<!--                                        </li>-->
+                                        <!--                                        <li><a href="#">Home</a>-->
+                                        <!--                                            <ul class="sub_menu">-->
+                                        <!--                                                <li><a href="#">Home 1</a></li>-->
+                                        <!--                                                <li><a href="#">Home 2</a></li>-->
+                                        <!--                                            </ul>-->
+                                        <!--                                        </li>-->
+                                        <!--                                        <li><a href="#">Pages</a>-->
+                                        <!--                                            <ul class="sub_menu">-->
+                                        <!--                                                <li><a href="#">About Us</a></li>-->
+                                        <!--                                                <li><a href="#">Contact Us</a></li>-->
+                                        <!--                                            </ul>-->
+                                        <!--                                        </li>-->
                                         <li>
                                             <router-link to="/catalog">Каталог</router-link>
                                         </li>
-<!--                                        <li><a href="#">Product</a></li>-->
+                                        <!--                                        <li><a href="#">Product</a></li>-->
                                         <li>
                                             <a href="/admin">Админка</a>
                                         </li>
-<!--                                        <li><a href="contact.html">Contact Us</a></li>-->
+                                        <!--                                        <li><a href="contact.html">Contact Us</a></li>-->
                                     </ul>
                                 </nav>
                             </div>
@@ -66,7 +62,7 @@
             </div>
         </header>
 
-        <router-view />
+        <router-view/>
 
         <!-- footer section start -->
         <footer class="footer_section footer_bg">
@@ -177,6 +173,20 @@
         <!-- footer section end -->
     </div>
 </template>
+
+<script setup>
+import {provide} from "vue";
+
+function scrollToElement(elementId) {
+    const el = document.getElementById(elementId)
+
+    if (el) {
+        el.scrollIntoView({behavior: 'smooth'})
+    }
+}
+
+provide('scrollToElement', scrollToElement)
+</script>
 
 <style scoped>
 

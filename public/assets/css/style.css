@@ -6319,7 +6319,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   background: #FFFFFF;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   padding: 30px 32px 40px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .shop_widget_list {
@@ -6338,7 +6338,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .shop_widget_list.categories {
-  padding: 56px 32px 74px;
+  padding: 30px 32px 24px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .shop_widget_list.categories {
@@ -6372,7 +6372,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .shop_widget_title.categories_title {
-  margin-bottom: 42px;
+  margin-bottom: 30px;
 }
 @media only screen and (max-width: 767px) {
   .shop_widget_title.categories_title {
@@ -6381,7 +6381,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .widget_categories ul li {
-  margin-bottom: 37px;
+  margin-bottom: 24px;
 }
 .widget_categories ul li:last-child {
   margin-bottom: 0;

@@ -65,7 +65,7 @@ class ProductSeeder extends Seeder
 Дополнительно для хранения и переноски вы можете заказать у меня чехол, который выполняется из плотной ткани. Застёгивается на две встречных молнии и имеет удобные ручки из специальной плотной, текстильной ленты для строп.',
                 'preview_image' => '/images/Gamak_ajur/Gamak_ajur_main.jpg',
                 'price' => 45000,
-                'count' => 1,
+                'count' => 3,
                 'is_published' => true,
                 'category_id' => 3,
             ],

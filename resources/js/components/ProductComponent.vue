@@ -6,17 +6,25 @@
                     <div class="container">
                         <div class="row">
                             <div class="tab-content">
-                                <div class="tab-pane fade active show" id="info" role="tabpanel">
+                                <div :class="['tab-pane', 'fade', 'active', 'show', { 'text-center': isPortrait }]"
+                                     id="info" role="tabpanel">
                                     <div class="product_info__flex d-flex">
                                         <div class="product_info_thumb">
-                                            <div class="mb-3">
-                                                <img :src="`/storage/` + product.preview_image" alt="">
+                                            <div class="mb-3 d-flex justify-content-center">
+                                                <img style="height: 500px; width: auto; object-fit: contain;"
+                                                     :src="`/storage/` + showImagePath" alt="" id="showImage">
                                             </div>
                                             <div class="d-flex justify-content-center">
-                                                <div class="related_product_inner d-flex">
-                                                    <div v-if="product" v-for="image in product.product_images"
-                                                         class="ms-3">
-                                                        <a href="#">
+                                                <div class="related_product_inner d-flex gap-2">
+                                                    <div>
+                                                        <a @click.prevent="showProductImage(product.preview_image)"
+                                                           href="#">
+                                                            <img style="height: 70px; width: auto;"
+                                                                 :src="`/storage/` + product.preview_image" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div v-if="product" v-for="image in product.product_images">
+                                                        <a @click.prevent="showProductImage(image.file_path)" href="#">
                                                             <img style="height: 70px; width: auto;"
                                                                  :src="`/storage/` + image.file_path" alt="">
                                                         </a>
@@ -51,23 +59,16 @@
                                                             Количество: {{ product.count }}
                                                         </span>
                                                     </div>
-                                                    <div class="product_variant_quantity d-flex align-items-center">
+                                                    <div
+                                                        :class="['product_variant_quantity', 'd-flex', isPortrait ? 'justify-content-center' : 'align-items-center' ]">
                                                         <div class="pro-qty border">
-                                                            <a href="#" class="dec qty-btn">-</a>
-                                                            <input min="1" max="100" type="tex" value="1">
-                                                            <a href="#" class="inc qty-btn">+</a>
+                                                            <a @click.prevent="spendCountPurchases" href="#"
+                                                               class="dec qty-btn">-</a>
+                                                            <input min="1" max="100" type="text" :value="countPurchase">
+                                                            <a @click.prevent="addCountPurchases" href="#"
+                                                               class="inc qty-btn">+</a>
                                                         </div>
-                                                        <button class="btn btn-link" type="submit">add to cart</button>
-                                                    </div>
-                                                    <div class=" product_d_action">
-                                                        <ul class="d-flex">
-                                                            <li><a href="#" title="Add to wishlist"> <img src="" alt="">
-                                                                Add to Wishlist <i
-                                                                    class="ion-android-arrow-forward"></i></a></li>
-                                                            <li><a href="#" title="Add to wishlist"><i
-                                                                class="ion-android-arrow-back"></i> ADD TO COMPARE</a>
-                                                            </li>
-                                                        </ul>
+                                                        <button class="btn btn-link" type="submit">В корзину</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -91,23 +92,40 @@
 
 <script setup>
 import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
+import {inject, onMounted, onUnmounted, ref} from "vue";
 import axios from "axios";
+
+const scrollToElement = inject('scrollToElement')
+const isPortrait = ref(false)
 
 const route = useRoute()
 const idProduct = route.params.id
 const product = ref()
+const showImagePath = ref()
 const selectedColor = ref()
+const countPurchase = ref()
 
 onMounted(() => {
+    checkOrientation()
+    window.addEventListener('resize', checkOrientation);
     getProduct()
 })
+
+onUnmounted(() => {
+    window.removeEventListener('resize', checkOrientation);
+})
+
+function checkOrientation() {
+    isPortrait.value = window.innerWidth < window.innerHeight;
+}
 
 function getProduct() {
     axios.get(`/api/products/${idProduct}`)
         .then(res => {
             product.value = res.data
             selectedColor.value = product.value.colors[0].id
+            countPurchase.value = 1
+            showImagePath.value = product.value.preview_image
         })
         .catch(err => {
             console.log(err);
@@ -118,9 +136,32 @@ function isSelectedColor(idColor) {
     return selectedColor.value === idColor;
 }
 
+function showProductImage(imagePath) {
+    showImagePath.value = imagePath
+    scrollToElement('showImage')
+}
+
 function selectColor(idColor) {
     selectedColor.value = idColor
 }
+
+function addCountPurchases() {
+    countPurchase.value++
+
+    if (countPurchase.value > product.value.count) {
+        countPurchase.value = product.value.count
+    }
+}
+
+function spendCountPurchases() {
+    countPurchase.value--
+
+    if (countPurchase.value < 1) {
+        countPurchase.value = 1
+    }
+}
+
+
 </script>
 
 <style scoped>
