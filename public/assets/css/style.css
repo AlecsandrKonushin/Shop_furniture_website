@@ -5290,7 +5290,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .single_product {
-  margin-bottom: 92px;
+  margin-bottom: 40px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .single_product {
@@ -5902,7 +5902,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .productinfo_text_flex {
-  width: calc(100% - 470px);
+  width: calc(90% - 470px);
   padding-left: 110px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -6190,14 +6190,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .breadcrumbs_area {
   background: #F9F9F9;
-  padding: 50px 0;
+  padding: 25px 0;
 }
 
 .breadcrumb_content h2 {
   font-weight: normal;
   font-size: 34px;
   line-height: 45px;
-  margin-bottom: 19px;
+  margin-bottom: 0px;
   font-family: "Poppins", sans-serif;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -6210,7 +6210,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   .breadcrumb_content h2 {
     font-size: 26px;
     line-height: 35px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
   }
 }
 .breadcrumb_content ul li {
@@ -6228,7 +6228,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .shop_page_section {
-  padding: 135px 0 128px;
+  padding: 50px 0 128px;
 }
 .shop_page_section .container {
   max-width: 1570px;
@@ -6593,7 +6593,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .shop_top_bar {
-  margin-bottom: 50px;
+  margin-bottom: 12px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .shop_top_bar {

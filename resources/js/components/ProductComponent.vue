@@ -64,11 +64,14 @@
                                                         <div class="pro-qty border">
                                                             <a @click.prevent="spendCountPurchases" href="#"
                                                                class="dec qty-btn">-</a>
-                                                            <input min="1" max="100" type="text" :value="countPurchase">
+                                                            <input min="1" max="100" type="text" :value="countPurchase"
+                                                                   readonly>
                                                             <a @click.prevent="addCountPurchases" href="#"
                                                                class="inc qty-btn">+</a>
                                                         </div>
-                                                        <button class="btn btn-link" type="submit">В корзину</button>
+                                                        <button @click.prevent="addProductToCart" class="btn btn-link"
+                                                                type="submit">В корзину
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -161,6 +164,32 @@ function spendCountPurchases() {
     }
 }
 
+function addProductToCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    let found = false;
+
+    for (let productInCart of cart) {
+        if (productInCart.id === idProduct && productInCart.color === selectedColor.value) {
+            let countProduct = Number(productInCart.count);
+            let totalCount = countProduct + countPurchase.value;
+
+            productInCart.count = Math.min(totalCount, product.value.count);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        cart.push({
+            id: idProduct,
+            color: selectedColor.value,
+            count: countPurchase.value
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 </script>
 

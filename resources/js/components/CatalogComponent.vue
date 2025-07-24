@@ -26,6 +26,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <div class="shop_top_bar d-flex justify-content-between">
+                        <div class="shop_product_count">
+                        </div>
+                        <div class="shop_top_right d-flex">
+                            <div class="product_sorting">
+                                <select v-model="sortOption" @change="getProducts">
+                                    <option selected value="alpha_asc">По алфавиту (возрастание)</option>
+                                    <option value="alpha_desc">По алфавиту (убывание)</option>
+                                    <option value="price_asc">По цене (минимальная)</option>
+                                    <option value="price_desc">По цене (максимальная)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="shop_page_inner d-flex ">
                         <div class="shop_sidebar_widget">
                             <div class="shop_widget_list categories">
@@ -91,20 +106,6 @@
                             </div>
                         </div>
                         <div class="shop_right_sidaber">
-                            <div class="shop_top_bar d-flex justify-content-between">
-                                <div class="shop_product_count">
-                                </div>
-                                <div class="shop_top_right d-flex">
-                                    <div class="product_sorting">
-                                        <select v-model="sortOption" @change="getProducts">
-                                            <option selected value="alpha_asc">По алфавиту (возрастание)</option>
-                                            <option value="alpha_desc">По алфавиту (убывание)</option>
-                                            <option value="price_asc">По цене (минимальная)</option>
-                                            <option value="price_desc">По цене (максимальная)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="shop_gallery">
                                 <div class="row">
                                     <div v-if="products" v-for="product in products" class="col-lg-4 col-md-4 col-sm-6">

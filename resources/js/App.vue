@@ -6,32 +6,24 @@
                     <div class="col-12">
                         <div class="main_header d-flex justify-content-between align-items-center">
                             <div class="header_logo">
-                                <a class="sticky_none" href="#"><img src="" alt=""></a>
+                                <router-link to="/" class="sticky_none" href="#">
+                                    <img style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"
+                                         :src="`/storage/images/logo.jpg`" alt="">
+                                </router-link>
                             </div>
                             <!--main menu start-->
                             <div class="main_menu d-none d-lg-block">
                                 <nav>
                                     <ul class="d-flex">
-                                        <!--                                        <li><a href="#">Home</a>-->
-                                        <!--                                            <ul class="sub_menu">-->
-                                        <!--                                                <li><a href="#">Home 1</a></li>-->
-                                        <!--                                                <li><a href="#">Home 2</a></li>-->
-                                        <!--                                            </ul>-->
-                                        <!--                                        </li>-->
-                                        <!--                                        <li><a href="#">Pages</a>-->
-                                        <!--                                            <ul class="sub_menu">-->
-                                        <!--                                                <li><a href="#">About Us</a></li>-->
-                                        <!--                                                <li><a href="#">Contact Us</a></li>-->
-                                        <!--                                            </ul>-->
-                                        <!--                                        </li>-->
                                         <li>
                                             <router-link to="/catalog">Каталог</router-link>
                                         </li>
-                                        <!--                                        <li><a href="#">Product</a></li>-->
+                                        <li>
+                                            <router-link to="/cart">Корзина</router-link>
+                                        </li>
                                         <li>
                                             <a href="/admin">Админка</a>
                                         </li>
-                                        <!--                                        <li><a href="contact.html">Contact Us</a></li>-->
                                     </ul>
                                 </nav>
                             </div>
