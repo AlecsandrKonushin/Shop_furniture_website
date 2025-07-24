@@ -182,6 +182,7 @@ function addProductToCart() {
 
     if (!found) {
         cart.push({
+            cartId: crypto.randomUUID(),
             id: idProduct,
             color: selectedColor.value,
             count: countPurchase.value

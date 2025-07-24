@@ -16,12 +16,14 @@
                         <div class="row">
                             <div class="tab-content">
                                 <div class="tab-pane active show" id="info" role="tabpanel">
-                                    <div v-for="(product, index) in products" :key="index" class="d-flex justify-content-center">
-                                        <div class="">
-                                            <div class="">
-                                                <img style="height: 200px; width: auto; object-fit: contain;"
-                                                     :src="`/storage/` + product.meta.preview_image" alt=""
-                                                     id="showImage">
+                                    <div v-for="(product, index) in products" :key="index"
+                                         class="d-flex justify-content-center mb-3">
+                                        <div>
+                                            <div>
+                                                <img
+                                                    style="height: 200px; width: 200px; object-fit: contain; display: block;"
+                                                    :src="`/storage/` + product.meta.preview_image" alt=""
+                                                    id="showImage">
                                             </div>
                                         </div>
                                         <div
@@ -36,8 +38,8 @@
                                                 <p class="mb-1">Цвет</p>
                                                 <ul>
                                                     <li v-for="color in product.meta.colors">
-                                                        <a :class="{active: isSelectedColor(product.meta.id, color.id)}"
-                                                           @click.prevent="selectColor(product.meta.id ,color.id)"
+                                                        <a :class="{active: isSelectedColor(product.cartId, color.id)}"
+                                                           @click.prevent="selectColor(product.cartId ,color.id)"
                                                            :style="{background: '#' + color.color}"
                                                            href="#"></a>
                                                     </li>
@@ -60,11 +62,12 @@
                                                     <div
                                                         class="product_variant_quantity d-flex">
                                                         <div class="pro-qty border">
-                                                            <a @click.prevent="spendCountProduct(product.meta.id)"
+                                                            <a @click.prevent="spendCountProduct(product.cartId)"
                                                                href="#"
                                                                class="dec qty-btn">-</a>
-                                                            <input min="1" max="100" type="text" :value="product.count" readonly>
-                                                            <a @click.prevent="addCountProduct(product.meta.id)"
+                                                            <input min="1" max="100" type="text" :value="product.count"
+                                                                   readonly>
+                                                            <a @click.prevent="addCountProduct(product.cartId)"
                                                                href="#"
                                                                class="inc qty-btn">+</a>
                                                         </div>
@@ -83,11 +86,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="mini_cart_close">
+                                            <a @click.prevent="removeProductFromCart(product.cartId)" href="#"><i
+                                                class="ion-android-close"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="products.length === 0">
+            <div class="tab-pane justify-content-center d-flex" id="vendor" role="tabpanel">
+                <div class="product_info_content col-8">
+                    <h4 class="text-center">Ваша корзина пуста</h4>
+                    <p class="text-center product_price_box">
+                        <router-link style="color: #AB6E35;" to="/catalog">Нажмите здесь</router-link>
+                        , чтобы продолжить покупки
+                    </p>
                 </div>
             </div>
         </div>
@@ -126,6 +144,7 @@ async function getCartProducts() {
             try {
                 const res = await axios.get(`/api/products/cart/${productInCart.id}`)
                 return {
+                    'cartId': productInCart.cartId,
                     'meta': res.data,
                     'color': productInCart.color,
                     'count': productInCart.count
@@ -138,13 +157,11 @@ async function getCartProducts() {
 
         const results = await Promise.all(productPromises)
         products.value = results.filter(p => p !== null)
-    } else {
-        console.log('Logic not have products in cart')
     }
 }
 
-function selectColor(idProduct, idColor) {
-    let product = getProductById(idProduct)
+function selectColor(cartId, idColor) {
+    let product = getProductByCartId(cartId)
 
     if (product) {
         product.color = idColor;
@@ -152,8 +169,8 @@ function selectColor(idProduct, idColor) {
     }
 }
 
-function isSelectedColor(idProduct, idColor) {
-    let product = getProductById(idProduct)
+function isSelectedColor(cartId, idColor) {
+    let product = getProductByCartId(cartId)
 
     if (product) {
         return product.color === idColor
@@ -162,8 +179,8 @@ function isSelectedColor(idProduct, idColor) {
     return false
 }
 
-function spendCountProduct(idProduct) {
-    let product = getProductById(idProduct)
+function spendCountProduct(cartId) {
+    let product = getProductByCartId(cartId)
 
     if (product) {
         if (product.count > 1) {
@@ -173,8 +190,8 @@ function spendCountProduct(idProduct) {
     }
 }
 
-function addCountProduct(idProduct) {
-    let product = getProductById(idProduct)
+function addCountProduct(cartId) {
+    let product = getProductByCartId(cartId)
 
     if (product) {
         if (product.count < product.meta.max_count) {
@@ -184,8 +201,14 @@ function addCountProduct(idProduct) {
     }
 }
 
-function getProductById(idProduct) {
-    return products.value.find(p => p.meta.id === idProduct)
+function removeProductFromCart(cartId) {
+    products.value = products.value.filter(p => p.cartId !== cartId)
+    saveCart()
+}
+
+function getProductByCartId(cartId) {
+
+    return products.value.find(p => p.cartId === cartId)
 }
 
 function saveCart() {
@@ -195,6 +218,7 @@ function saveCart() {
     products.value.forEach(prod => {
         let newProduct =
             {
+                'cartId': prod.cartId,
                 'id': prod.meta.id,
                 'color': prod.color,
                 'count': prod.count
@@ -204,8 +228,6 @@ function saveCart() {
     })
 
     localStorage.setItem('cart', JSON.stringify(cartProducts))
-
-    console.log(localStorage.getItem('cart'));
 }
 
 </script>
